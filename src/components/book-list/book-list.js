@@ -9,7 +9,21 @@ import * as style from './book-list.module.css';
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 
-class BookList extends Component {
+const BookList = ({books}) => {
+    return (
+        <ul className={style.bookList}>
+            {
+                books.map((book, index) => {
+                    return (
+                        <li key={index}><BookListItem book={book}/></li>
+                    )
+                })
+            }
+        </ul>
+    )
+};
+
+class BookListContainer extends Component {
 
     componentDidMount() {
         this.props.fetchBooks();
@@ -24,18 +38,8 @@ class BookList extends Component {
         if (error) {
             return <ErrorIndicator error={error}/>
         }
+        return <BookList books={books} />
 
-        return (
-            <ul className={style.bookList}>
-                {
-                    books.map((book, index) => {
-                        return (
-                            <li key={index}><BookListItem book={book}/></li>
-                        )
-                    })
-                }
-            </ul>
-        )
     }
 }
 
@@ -52,4 +56,4 @@ const mapDispatchToProps = (dispatch, {bookstoreService}) => {
 export default compose(
     withBookstoreService(),
     connect(mapStateToProps, mapDispatchToProps)
-)(BookList);
+)(BookListContainer);
