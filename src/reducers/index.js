@@ -2,27 +2,34 @@ const initialState = {
     books: [],
     isLoading: true,
     error: null,
-    cartItems: [
-        {
-            id: 1,
-            name: 'Book 1',
-            count: 3,
-            total: 150
-        },
-        {
-            id: 2,
-            name: 'Book 2',
-            count: 5,
-            total: 50
-        },
-        {
-            id: 3,
-            name: 'Book 3',
-            count: 2,
-            total: 20
-        }
-    ],
+    cartItems: [],
     orderTotal: 200
+};
+
+const updateCartItems = (cartItems, item, idx) => {
+    if (idx === -1) {
+        return [
+            ...cartItems,
+            item
+        ];
+    }
+
+    return [
+        ...cartItems.slice(0, idx),
+        item,
+        ...cartItems.slice(idx + 1, idx)
+    ];
+};
+
+const updateCartIem = (book, item = {}) => {
+
+    const {id = book.id, count = 0, title = book.title, total = 0} = item;
+    return {
+        id,
+        title,
+        count: count + 1,
+        total: total + book.price
+    }
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,12 +50,26 @@ const reducer = (state = initialState, action) => {
                 error: null
             };
         case 'FETCH_BOOKS_FAILURE':
-          return {
-              ...state,
-              books: [],
-              isLoading: false,
-              error: action.payload
-          };
+            return {
+                ...state,
+                books: [],
+                isLoading: false,
+                error: action.payload
+            };
+
+        case 'BOOK_ADDED_TO_CART':
+            const bookId = action.payload;
+            const book = state.books.find((book) => book.id === bookId);
+            const itemIndex = state.cartItems.findIndex(({id}) => id === bookId);
+            const item = state.cartItems[itemIndex];
+
+            const newBookItem = updateCartIem(book, item);
+
+            return {
+                ...state,
+                cartItems: updateCartItems(state.cartItems, newBookItem, itemIndex)
+            };
+
         default:
             return state;
     }
