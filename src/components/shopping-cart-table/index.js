@@ -1,3 +1,3 @@
-import ShoppingСartTable from "./shopping-cart-table";
+import ShoppingCartTable from "./shopping-cart-table";
 
-export default ShoppingСartTable;
+export default ShoppingCartTable;

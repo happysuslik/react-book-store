@@ -12,3 +12,11 @@
     margin-left: 5px;
     margin-top: 5px;
 }
+
+.groupButton {
+    display: inline-flex;
+}
+
+.add {
+    margin: 0 5px;
+}
