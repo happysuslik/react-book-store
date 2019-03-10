@@ -21,7 +21,7 @@ export default class BookstoreService {
     getBooks() {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (Math.random() > 0.50) {
+                if (Math.random() > 0.75) {
                     reject('Error! Something bad happened');
                 } else {
                     resolve(this.data);

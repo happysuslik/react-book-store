@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import * as style from './shopping-cart-table.module.css';
-import {bookAddedToCart, bookDecrease, bookIncrease, deleteOrderFromCart} from "../../actions";
+import {bookAddedToCart, bookDecrease, deleteOrderFromCart} from "../../actions";
 
 const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete }) => {
     const renderRow = (item, idx) => {
