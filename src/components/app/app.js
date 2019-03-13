@@ -7,7 +7,7 @@ import ShopHeader from "../shopHeader";
 const App = () => {
     return (
         <main className="container">
-            <ShopHeader numItems={5} total={210}/>
+            <ShopHeader />
             <Switch>
                 <Route
                     path="/"
@@ -17,6 +17,7 @@ const App = () => {
                 <Route
                     path="/cart"
                     component={CartPage}
+
                 />
             </Switch>
         </main>
