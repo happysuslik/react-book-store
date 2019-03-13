@@ -17,13 +17,17 @@ const updateCartItems = (cartItems, item, idx) => {
     return [
         ...cartItems.slice(0, idx),
         item,
-        ...cartItems.slice(idx + 1, idx)
+        ...cartItems.slice(idx + 1)
     ];
 };
 
 const updateCartIem = (book, item = {}, quantity) => {
 
-    const {id = book.id, count = 0, title = book.title, total = 0} = item;
+    const {
+        id = book.id,
+        count = 0,
+        title = book.title,
+        total = 0 } = item;
     return {
         id,
         title,
